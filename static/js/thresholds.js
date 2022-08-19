@@ -100,9 +100,19 @@ const ThresholdModal = {
                             <select class="selectpicker bootstrap-select__b mb-3" data-style="btn"
                                 v-model="target"
                             >
-                                <option value="throughput">Throughput</option>
-                                <option value="error_rate">Error rate</option>
-                                <option value="response_time">Response time</option>
+                                <option value="total">Total Time</option>
+                                <option value="time_to_first_byte">Time To First Bite</option>
+                                <option value="time_to_first_paint">Time To First Paint</option>
+                                <option value="dom_content_loading">Dom Content Load</option>
+                                <option value="dom_processing">Dom Processing</option>
+                                <option value="speed_index">Speed Index</option>
+                                <option value="time_to_interactive">Time To Interactive</option>
+                                <option value="first_contentful_paint">First Contentful Paint</option>
+                                <option value="largest_contentful_paint">Largest Contentful Paint</option>
+                                <option value="cumulative_layout_shift">Cumulative Layout Shift</option>
+                                <option value="total_blocking_time">Total Blocking Time</option>
+                                <option value="first_visual_change">First Visual Change</option>
+                                <option value="last_visual_change">Last Visual Change</option>
                             </select>
                             <div class="invalid-feedback" style="display: block;">[[ errors.target ]]</div>
                         </div>
