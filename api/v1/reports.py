@@ -5,11 +5,11 @@ from pylon.core.tools import log
 from flask import current_app, request, make_response
 
 from ...models.pd.test_parameters import UITestParamsRun
-from ...models.ui_report import UIReport
+from ...models.reports import UIReport
 from tools import MinioClient, api_tools
 from datetime import datetime
 
-from ...models.ui_tests import UIPerformanceTest
+from ...models.tests import UIPerformanceTest
 
 
 class API(Resource):

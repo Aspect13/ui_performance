@@ -3,7 +3,7 @@ from tools import db_tools, db, rpc_tools
 
 
 class UIResult(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin):
-    __tablename__ = "ui_result"
+    __tablename__ = 'ui_performance_results'
 
     id = Column(Integer, primary_key=True)
     project_id = Column(Integer, unique=False, nullable=False)

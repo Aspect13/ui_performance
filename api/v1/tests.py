@@ -8,7 +8,7 @@ from flask import request
 from tools import api_tools
 
 from ...models.pd.test_parameters import UITestParam
-from ...models.ui_tests import UIPerformanceTest
+from ...models.tests import UIPerformanceTest
 
 
 from ...utils.utils import parse_test_data, run_test

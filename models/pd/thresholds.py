@@ -1,7 +1,7 @@
 from pydantic import BaseModel, validator, AnyUrl, parse_obj_as, root_validator, constr
 
-from ..ui_report import UIReport
-from ...models.ui_tests import UIPerformanceTest
+from ..reports import UIReport
+from ...models.tests import UIPerformanceTest
 
 
 class ThresholdPD(BaseModel):

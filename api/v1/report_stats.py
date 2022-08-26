@@ -1,8 +1,8 @@
 from flask_restful import Resource
 from pylon.core.tools import log
 from flask import current_app, request, make_response
-from ...models.ui_report import UIReport
-from ...models.ui_result import UIResult
+from ...models.reports import UIReport
+from ...models.results import UIResult
 from tools import api_tools
 from sqlalchemy import and_
 

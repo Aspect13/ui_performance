@@ -5,7 +5,7 @@ from flask import request
 from flask_restful import Resource
 
 from ...models.pd.test_parameters import UITestParams, UITestParam
-from ...models.ui_tests import UIPerformanceTest
+from ...models.tests import UIPerformanceTest
 from ...utils.utils import run_test, parse_test_data
 
 

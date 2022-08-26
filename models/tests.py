@@ -25,50 +25,24 @@ from ..constants import RUNNER_MAPPING
 
 
 class UIPerformanceTest(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin):
-    __tablename__ = "performance_tests_ui"
+    __tablename__ = 'ui_performance_tests'
     id = Column(Integer, primary_key=True)
     project_id = Column(Integer, unique=False, nullable=False)
     test_uid = Column(String(128), unique=True, nullable=False)
     name = Column(String(128), nullable=False)
-
-    # bucket = Column(String(128), nullable=False)
-    # file = Column(String(128), nullable=False)
-    # entrypoint = Column(String(128), nullable=False)
-    # runner = Column(String(128), nullable=False)
-    # region = Column(String(128), nullable=False)
-
     browser = Column(String(128), nullable=False)
-    # reporting = Column(ARRAY(String), nullable=False)
-    # parallel = Column(Integer, nullable=False)
-    # params = Column(JSON)
-    # env_vars = Column(JSON)
-    # customization = Column(JSON)
-    # git = Column(JSON)
-    # cc_env_vars = Column(JSON)
-    # job_type = Column(String(20))
-
     loops = Column(Integer, nullable=True)
     aggregation = Column(String(20), nullable=True)
-
-
     parallel_runners = Column(Integer, nullable=False)
     location = Column(String(128), nullable=False)
-
     entrypoint = Column(String(128), nullable=False)
     runner = Column(String(128), nullable=False)
-
-    # reporting = Column(ARRAY(JSON), nullable=False)  #- integrations?
-
     test_parameters = Column(ARRAY(JSON), nullable=True)
-
     integrations = Column(JSON, nullable=True)
-
     schedules = Column(ARRAY(Integer), nullable=True, default=[])
-
     env_vars = Column(JSON)
     customization = Column(JSON)
     cc_env_vars = Column(JSON)
-
     source = Column(JSON, nullable=False)
 
     @property
@@ -160,20 +134,7 @@ class UIPerformanceTest(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin)
             cls.test_uid == test_id
         )
 
-    # def configure_execution_json(self, output='cc', browser=None, test_type=None, params=None, env_vars=None, reporting=None,
-    #                              customization=None, cc_env_vars=None, parallel=None, execution=False):
     def configure_execution_json(self, execution=False):
-
-        # reports = []
-        # for report in self.reporting:
-        #     if report:
-        #         reports.append(f"-r {report}")
-        #
-        # cmd = f"-sc {self.entrypoint} -l {self.loops} -b {browser} " \
-        #       f"-a {self.aggregation} {' '.join(reports)} -tid {self.test_uid}"
-
-
-
         execution_json = {
             "test_id": self.test_uid,
             "container": self.container,
@@ -186,57 +147,9 @@ class UIPerformanceTest(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin)
             **self.rpc.call.parse_source(self.source).execution_json,
             "integrations": self.integrations
         }
-
-        # if "jira" in self.reporting:
-        #     execution_json["execution_params"]["JIRA"] = unsecret("{{secret.jira}}", project_id=self.project_id)
-        #
-        # if "ado" in self.reporting:
-        #     execution_json["execution_params"]["ADO"] = unsecret("{{secret.ado}}", project_id=self.project_id)
-        #
-        # if "quality" in self.reporting:
-        #     execution_json["quality_gate"] = True
-        # if "junit" in self.reporting:
-        #     execution_json["junit"] = True
-
-        # if self.git:
-        #     execution_json["git"] = self.git
-
-        # if self.env_vars:
-        #     for key, value in self.env_vars.items():
-        #         execution_json["execution_params"][key] = value
-
-        # if self.cc_env_vars:
-        #     for key, value in self.cc_env_vars.items():
-        #         execution_json["cc_env_vars"][key] = value
-        # if "RABBIT_HOST" not in execution_json["cc_env_vars"].keys():
-        #     execution_json["cc_env_vars"]["RABBIT_HOST"] = "{{secret.rabbit_host}}"
-        # public_queues = self.rpc.call.get_rabbit_queues("carrier")
-        # if execution_json["channel"] in public_queues:
-        #     execution_json["cc_env_vars"]["RABBIT_USER"] = "{{secret.rabbit_user}}"
-        #     execution_json["cc_env_vars"]["RABBIT_PASSWORD"] = "{{secret.rabbit_password}}"
-        #     execution_json["cc_env_vars"]["RABBIT_VHOST"] = "carrier"
-        # else:
-        #     execution_json["cc_env_vars"]["RABBIT_USER"] = "{{secret.rabbit_project_user}}"
-        #     execution_json["cc_env_vars"]["RABBIT_PASSWORD"] = "{{secret.rabbit_project_password}}"
-        #     execution_json["cc_env_vars"]["RABBIT_VHOST"] = "{{secret.rabbit_project_vhost}}"
-
-        # if self.customization:
-        #     for key, value in self.customization.items():
-        #         if "additional_files" not in execution_json["execution_params"]:
-        #             execution_json["execution_params"]["additional_files"] = dict()
-        #         execution_json["execution_params"]["additional_files"][key] = value
-        # execution_json["execution_params"] = dumps(execution_json["execution_params"])
         if execution:
             execution_json = secrets_tools.unsecret(execution_json, project_id=self.project_id)
         return execution_json
-        # if output == 'cc':
-        #     return execution_json
-
-        # return f'docker run -t --rm -e project_id={self.project_id} ' \
-        #        f'-e galloper_url={secrets_tools.unsecret("{{secret.galloper_url}}", project_id=self.project_id)} ' \
-        #        f"-e token=\"{secrets_tools.unsecret('{{secret.auth_token}}', project_id=self.project_id)}\" " \
-        #        f'getcarrier/control_tower:{c.CURRENT_RELEASE} ' \
-        #        f'--test_id {self.test_uid}'
 
     def to_json(self, exclude_fields: tuple = (), keep_custom_test_parameters: bool = True, with_schedules: bool = False) -> dict:
         test = super().to_json(exclude_fields=exclude_fields)
@@ -269,4 +182,3 @@ class UIPerformanceTest(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin)
             keep_custom_test_parameters=True,  # explicitly
             with_schedules=with_schedules
         )
-

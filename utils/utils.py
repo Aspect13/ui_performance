@@ -22,7 +22,7 @@ def run_test(test: 'UIPerformanceTest', config_only: bool = False, execution: bo
     if config_only:
         return event
 
-    from ..models.ui_report import UIReport
+    from ..models.reports import UIReport
     report = UIReport(
         uid=uuid4(),
         name=test_parameter_value_by_name(test.all_test_parameters.dict()['test_parameters'], 'test_name'),

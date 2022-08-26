@@ -1,7 +1,7 @@
 from pylon.core.tools import web, log  # pylint: disable=E0611,E0401
 from tools import auth, theme  # pylint: disable=E0401
 
-from ..models.ui_report import UIReport
+from ..models.reports import UIReport
 
 
 class Slot:  # pylint: disable=E1101,R0903

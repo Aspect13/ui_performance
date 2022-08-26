@@ -1,7 +1,7 @@
 from flask_restful import Resource
 
-from ...models.ui_report import UIReport
-from ...models.ui_tests import UIPerformanceTest
+from ...models.reports import UIReport
+from ...models.tests import UIPerformanceTest
 from ...utils.utils import run_test
 
 

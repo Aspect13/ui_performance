@@ -4,10 +4,10 @@ from pylon.core.tools import web
 from pydantic import ValidationError
 
 from ..models.pd.test_parameters import UITestParamsCreate, UITestParamsRun, UITestParams
-from ..models.pd.ui_test import TestOverrideable, TestCommon
-from ..models.ui_report import UIReport
-from ..models.ui_result import UIResult
-from ..models.ui_tests import UIPerformanceTest
+from ..models.pd.tests import TestOverrideable, TestCommon
+from ..models.reports import UIReport
+from ..models.results import UIResult
+from ..models.tests import UIPerformanceTest
 
 from tools import rpc_tools
 

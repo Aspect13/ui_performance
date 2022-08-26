@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 from sqlalchemy import and_
 
-from ...models.ui_report import UIReport
+from ...models.reports import UIReport
 
 
 class API(Resource):

@@ -3,7 +3,7 @@ from tools import db_tools, db, rpc_tools, constants as c, secrets_tools
 
 
 class UIReport(db_tools.AbstractBaseMixin, db.Base, rpc_tools.RpcMixin):
-    __tablename__ = "ui_report"
+    __tablename__ = 'ui_performance_reports'
 
     id = Column(Integer, primary_key=True)
     uid = Column(String(128), unique=True, nullable=False)

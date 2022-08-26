@@ -2,8 +2,8 @@ from flask import request
 from flask_restful import Resource
 from pylon.core.tools import log
 
-from ...models.ui_report import UIReport
-from ...models.ui_result import UIResult
+from ...models.reports import UIReport
+from ...models.results import UIResult
 
 
 class API(Resource):
